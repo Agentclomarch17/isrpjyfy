@@ -5,15 +5,18 @@ bottle moves, foams when shaken, and carbonation bubbles rise through it.
 
 ## Run
 
-No build step. Open `index.html` in a browser, or serve the folder:
+Open `index.html` in a browser. It is one self-contained file (styles, scripts, three.js and
+fonts are inlined), so it works on its own wherever it is copied or previewed.
+
+## Edit
+
+`index.html` is generated — edit the sources, then rebuild:
 
 ```sh
-python3 -m http.server 8000
+node build.js
 ```
 
-## Layout
-
-- `index.html`, `css/style.css` — page and styling
+- `index.src.html`, `css/style.css` — page and styling
 - `js/main.js` — WebGL scene: glass, cap, liquid shader, bubbles, scroll staging, interaction
 - `js/labels.js` — label artwork painted to canvas and used as textures
 - `vendor/three.min.js` — three.js r187 bundled as a single classic script (MIT)
