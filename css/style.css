@@ -1,0 +1,171 @@
+@font-face { font-family: "Ruslan Display"; src: url("../fonts/ruslan-display-cyrillic-400-normal.woff2") format("woff2"); font-display: swap; unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116; }
+@font-face { font-family: "Ruslan Display"; src: url("../fonts/ruslan-display-latin-400-normal.woff2") format("woff2"); font-display: swap; unicode-range: U+0000-00FF, U+2000-206F; }
+@font-face { font-family: "Playfair Display"; font-weight: 400; src: url("../fonts/playfair-display-cyrillic-400-normal.woff2") format("woff2"); font-display: swap; unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116; }
+@font-face { font-family: "Playfair Display"; font-weight: 400; src: url("../fonts/playfair-display-latin-400-normal.woff2") format("woff2"); font-display: swap; unicode-range: U+0000-00FF, U+2000-206F; }
+@font-face { font-family: "Playfair Display"; font-weight: 700; src: url("../fonts/playfair-display-cyrillic-700-normal.woff2") format("woff2"); font-display: swap; unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116; }
+@font-face { font-family: "Playfair Display"; font-weight: 700; src: url("../fonts/playfair-display-latin-700-normal.woff2") format("woff2"); font-display: swap; unicode-range: U+0000-00FF, U+2000-206F; }
+@font-face { font-family: "Playfair Display"; font-style: italic; font-weight: 400; src: url("../fonts/playfair-display-cyrillic-400-italic.woff2") format("woff2"); font-display: swap; unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116; }
+@font-face { font-family: "Playfair Display"; font-style: italic; font-weight: 400; src: url("../fonts/playfair-display-latin-400-italic.woff2") format("woff2"); font-display: swap; unicode-range: U+0000-00FF, U+2000-206F; }
+
+:root {
+  --bg: #0e0a05;
+  --gold: #e9b949;
+  --gold-soft: #f6d98a;
+  --cream: #f6ecc8;
+  --muted: #b9a982;
+  --serif: "Playfair Display", Georgia, "Times New Roman", serif;
+  --sans: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+}
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--cream);
+  font-family: var(--sans);
+  line-height: 1.6;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+.backdrop {
+  position: fixed; inset: 0; z-index: 0;
+  background:
+    radial-gradient(60% 55% at 50% 45%, rgba(214, 150, 30, .20), transparent 70%),
+    radial-gradient(90% 60% at 50% 110%, rgba(120, 70, 10, .35), transparent 70%),
+    linear-gradient(180deg, #171008 0%, #0e0a05 55%, #080603 100%);
+}
+.backdrop::after {
+  content: ""; position: absolute; inset: 0; opacity: .5;
+  background-image: radial-gradient(rgba(255, 220, 140, .07) 1px, transparent 1px);
+  background-size: 28px 28px;
+  mask-image: radial-gradient(70% 70% at 50% 50%, #000, transparent);
+  -webkit-mask-image: radial-gradient(70% 70% at 50% 50%, #000, transparent);
+}
+
+#stage {
+  position: fixed; inset: 0; z-index: 1;
+  width: 100%; height: 100%;
+  display: block;
+  opacity: 0; transition: opacity 1.2s ease;
+}
+#stage.ready { opacity: 1; }
+
+.nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 10;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 18px clamp(20px, 5vw, 64px);
+  background: linear-gradient(180deg, rgba(14, 10, 5, .85), transparent);
+}
+.nav__brand {
+  font-family: "Ruslan Display", var(--serif);
+  font-size: 1.35rem; color: var(--gold); text-decoration: none; letter-spacing: .02em;
+}
+.nav__links { display: flex; gap: clamp(16px, 3vw, 36px); }
+.nav__links a {
+  color: var(--cream); text-decoration: none; font-size: .82rem;
+  letter-spacing: .18em; text-transform: uppercase; opacity: .75; transition: opacity .2s, color .2s;
+}
+.nav__links a:hover { opacity: 1; color: var(--gold); }
+
+main { position: relative; z-index: 2; touch-action: pan-y; }
+.scene {
+  min-height: 100vh; min-height: 100svh;
+  display: flex; align-items: center;
+  padding: 110px clamp(20px, 7vw, 110px) 70px;
+}
+.scene--right { justify-content: flex-end; }
+.copy {
+  width: min(520px, 46vw);
+  opacity: 0; transform: translateY(28px);
+  transition: opacity .9s ease, transform .9s cubic-bezier(.2, .7, .2, 1);
+}
+.scene.in .copy { opacity: 1; transform: none; }
+
+.eyebrow {
+  margin: 0 0 14px; font-size: .78rem; letter-spacing: .32em; text-transform: uppercase; color: var(--gold);
+}
+.brand {
+  margin: 0 0 22px;
+  font-family: "Ruslan Display", var(--serif); font-weight: 400;
+  font-size: clamp(3rem, 5.6vw, 5.4rem); line-height: .95;
+  background: linear-gradient(180deg, #fff3c4 0%, #f0c14f 45%, #b9781a 100%);
+  -webkit-background-clip: text; background-clip: text; color: transparent;
+  filter: drop-shadow(0 6px 24px rgba(233, 160, 30, .25));
+}
+.brand span { display: block; font-size: .56em; margin-bottom: .08em; }
+h2 {
+  margin: 0 0 20px; font-family: var(--serif); font-weight: 700;
+  font-size: clamp(2rem, 3.8vw, 3.3rem); line-height: 1.1; color: #fff6dc;
+}
+.lede { font-family: var(--serif); font-style: italic; font-size: clamp(1.1rem, 1.6vw, 1.4rem); color: var(--gold-soft); margin: 0 0 30px; }
+.copy p { color: var(--muted); font-size: 1.04rem; }
+.copy p.lede { color: var(--gold-soft); }
+.copy p.eyebrow { color: var(--gold); font-size: .78rem; }
+
+.actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 26px; }
+.btn {
+  appearance: none; cursor: pointer; text-decoration: none;
+  font: 600 .86rem/1 var(--sans); letter-spacing: .12em; text-transform: uppercase;
+  padding: 16px 26px; border-radius: 999px; border: 1px solid transparent;
+  transition: transform .2s, box-shadow .2s, background .2s, border-color .2s;
+}
+.btn:hover { transform: translateY(-2px); }
+.btn:active { transform: translateY(0) scale(.98); }
+.btn:focus-visible { outline: 2px solid var(--cream); outline-offset: 3px; }
+.btn--gold {
+  color: #2a1a05; background: linear-gradient(180deg, #ffe08a, #e2a52b);
+  box-shadow: 0 10px 30px rgba(226, 165, 43, .35), inset 0 1px 0 rgba(255, 255, 255, .6);
+}
+.btn--ghost { color: var(--cream); background: rgba(255, 236, 180, .06); border-color: rgba(233, 185, 73, .45); backdrop-filter: blur(6px); }
+.btn--ghost:hover { border-color: var(--gold); background: rgba(255, 236, 180, .12); }
+
+.hint { margin-top: 30px; font-size: .82rem !important; letter-spacing: .08em; opacity: .7; }
+.hint__icon { display: inline-block; margin-right: 6px; color: var(--gold); animation: nudge 2.4s ease-in-out infinite; }
+@keyframes nudge { 0%, 100% { transform: translateX(-3px); } 50% { transform: translateX(3px); } }
+
+.meter { margin-top: 26px; height: 4px; width: min(280px, 100%); border-radius: 4px; background: rgba(255, 236, 180, .12); overflow: hidden; }
+.meter__bar { height: 100%; width: 100%; transform-origin: left; background: linear-gradient(90deg, #b9781a, #ffd866); transition: transform .3s linear; }
+
+.cards { list-style: none; margin: 28px 0 0; padding: 0; display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+.cards li {
+  padding: 22px 20px; border-radius: 18px;
+  background: linear-gradient(160deg, rgba(255, 226, 150, .10), rgba(255, 226, 150, .03));
+  border: 1px solid rgba(233, 185, 73, .22); backdrop-filter: blur(8px);
+}
+.cards strong { display: block; font-family: var(--serif); font-size: 2rem; line-height: 1.1; color: var(--gold); }
+.cards span { font-size: .86rem; color: var(--muted); }
+
+.footer {
+  position: relative; z-index: 2; text-align: center;
+  padding: 60px 20px 46px; color: var(--muted); font-size: .85rem;
+  background: linear-gradient(180deg, transparent, rgba(8, 6, 3, .95) 55%);
+}
+.footer__brand { font-family: "Ruslan Display", var(--serif); font-size: 1.5rem; color: var(--gold); margin: 0 0 6px; }
+.footer p { margin: 0; }
+
+@media (max-width: 760px) {
+  .nav__links { display: none; }
+  .scene, .scene--right { align-items: flex-end; justify-content: center; padding: 90px 16px 28px; }
+  .copy {
+    width: 100%; padding: 22px 20px; border-radius: 22px; text-align: center;
+    background: linear-gradient(180deg, rgba(14, 10, 5, .55), rgba(14, 10, 5, .88));
+    border: 1px solid rgba(233, 185, 73, .16); backdrop-filter: blur(8px);
+  }
+  .brand { font-size: clamp(2.6rem, 13vw, 4rem); margin-bottom: 12px; }
+  .lede { margin-bottom: 8px; }
+  .actions { justify-content: center; margin-top: 16px; }
+  .btn { padding: 14px 20px; }
+  .hint { margin-top: 16px; margin-bottom: 0; }
+  .meter { margin-left: auto; margin-right: auto; }
+  .cards { margin-top: 16px; }
+  .cards li { padding: 14px 12px; }
+  .cards strong { font-size: 1.5rem; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .copy { transition: none; }
+  .hint__icon { animation: none; }
+}
