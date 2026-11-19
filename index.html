@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Старый Мельник из бочонка — Мягкое</title>
+  <meta name="description" content="An interactive 3D bottle of Старый Мельник из бочонка Мягкое with live liquid, foam and bubbles.">
+  <meta name="theme-color" content="#0e0a05">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='15' fill='%23e9b949'/%3E%3Cpath d='M16 5v22M5 16h22' stroke='%232a190b' stroke-width='3' transform='rotate(35 16 16)'/%3E%3C/svg%3E">
+  <link rel="preload" href="fonts/ruslan-display-cyrillic-400-normal.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <div class="backdrop" aria-hidden="true"></div>
+  <canvas id="stage" aria-label="Interactive 3D beer bottle"></canvas>
+
+  <header class="nav">
+    <a class="nav__brand" href="#top" lang="ru">Старый Мельник</a>
+    <nav class="nav__links">
+      <a href="#story">Story</a>
+      <a href="#inside">Inside</a>
+      <a href="#notes">Notes</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="scene scene--left" id="top" data-scene="0">
+      <div class="copy">
+        <p class="eyebrow" lang="ru">Из бочонка · Мягкое</p>
+        <h1 class="brand" lang="ru"><span>Старый</span> Мельник</h1>
+        <p class="lede">Soft, golden and poured the old way — as if it came straight from the barrel.</p>
+        <div class="actions">
+          <button class="btn btn--gold" data-action="shake">Shake the bottle</button>
+          <a class="btn btn--ghost" href="#inside">See what's inside</a>
+        </div>
+        <p class="hint"><span class="hint__icon" aria-hidden="true">↔</span> Drag anywhere to spin the bottle</p>
+      </div>
+    </section>
+
+    <section class="scene scene--right" id="story" data-scene="1">
+      <div class="copy">
+        <p class="eyebrow">The tradition</p>
+        <h2>A miller's patience, bottled.</h2>
+        <p>The windmill on the label is a promise: good grain, unhurried brewing and a recipe that favours softness over bite.</p>
+        <p>Turn the bottle around — the wide shoulders and short neck are shaped after the small barrels the beer is named for.</p>
+      </div>
+    </section>
+
+    <section class="scene scene--left" id="inside" data-scene="2">
+      <div class="copy">
+        <p class="eyebrow">Inside the glass</p>
+        <h2>Alive with every move.</h2>
+        <p>The beer sloshes, settles and foams in real time. Shake it up, take a sip, then top it back up.</p>
+        <div class="actions">
+          <button class="btn btn--gold" data-action="shake">Shake</button>
+          <button class="btn btn--ghost" data-action="sip">Take a sip</button>
+          <button class="btn btn--ghost" data-action="refill">Refill</button>
+        </div>
+        <div class="meter" aria-hidden="true"><div class="meter__bar" id="meter"></div></div>
+      </div>
+    </section>
+
+    <section class="scene scene--right" id="notes" data-scene="3">
+      <div class="copy">
+        <p class="eyebrow">Tasting notes</p>
+        <h2>Мягкое means soft.</h2>
+        <ul class="cards">
+          <li><strong>4.3%</strong><span>Alcohol by volume</span></li>
+          <li><strong>Gold</strong><span>Clear, bright, sunlit</span></li>
+          <li><strong>Soft</strong><span>Gentle malt, light hop</span></li>
+          <li><strong>Cold</strong><span>Best served well chilled</span></li>
+        </ul>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <p class="footer__brand" lang="ru">Старый Мельник из бочонка</p>
+    <p>Concept showcase. Please drink responsibly — 18+ only.</p>
+  </footer>
+
+  <script src="vendor/three.min.js"></script>
+  <script src="js/labels.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>
