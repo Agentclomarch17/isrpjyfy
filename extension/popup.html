@@ -1,0 +1,24 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>New Hoplite organization</title>
+  <style>
+    :root { font: 14px/1.5 system-ui, sans-serif; color: #192820; background: #f7faf7; }
+    body { width: 268px; margin: 0; padding: 20px; }
+    h1 { margin: 0; font-size: 20px; }
+    p { margin: 8px 0 16px; }
+    button { font: inherit; cursor: pointer; width: 100%; border: none; margin-bottom: 6px; display: block; padding: 10px; border-radius: 6px; background: #185636;
+        color: white; text-align: center; text-decoration: none; font-weight: 600; }
+    button:focus-visible { outline: 3px solid #186aab; outline-offset: 2px; }
+  </style>
+</head>
+<body>
+  <h1>New Hoplite organization</h1>
+  <p>Create one organization in your signed-in Hoplite account. An empty name becomes workspace- plus seven random digits.</p>
+  <button id="create">Create organization on Free</button>
+  <p role="status" id="status"></p>
+  <a href="https://app.hoplite.sh/" target="_blank" rel="noopener noreferrer">Open Hoplite</a>
+  <script src="popup.js"></script>
+</body>
+</html>
