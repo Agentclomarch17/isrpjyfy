@@ -1,0 +1,10 @@
+{
+  "manifest_version": 3,
+  "name": "New Hoplite organization",
+  "version": "1.0.0",
+  "description": "Start Hoplite’s new-organization flow with the Free plan selected.",
+  "action": {
+    "default_title": "Create a Hoplite organization",
+    "default_popup": "popup.html"
+  }
+}
