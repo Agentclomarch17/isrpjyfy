@@ -1,0 +1,14 @@
+{
+  "manifest_version": 3,
+  "name": "New Hoplite organization",
+  "version": "1.3.0",
+  "description": "Open the new-organization form in your Hoplite account and choose Free at the plan step.",
+  "action": {
+    "default_title": "Create a Hoplite organization",
+    "default_popup": "popup.html"
+  },
+  "permissions": [
+    "activeTab",
+    "scripting"
+  ]
+}
